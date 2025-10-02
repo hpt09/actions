@@ -1,0 +1,13 @@
+name: Hourly HTTP Request
+
+on:
+  schedule:
+    # Runs at the beginning of every hour
+    - cron: '0 * * * *'
+
+jobs:
+  ping_url:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call the URL endpoint
+        run: curl -sS "https://voice-ai-api-harpreets-projects-f8b2f14c.vercel.app/api/checkBlocks"
