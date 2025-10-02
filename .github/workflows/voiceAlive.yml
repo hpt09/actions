@@ -4,6 +4,8 @@ on:
   schedule:
     # Runs at the beginning of every hour
     - cron: '0 * * * *'
+  # Allows you to run this workflow manually from the Actions tab for testing
+  workflow_dispatch:
 
 jobs:
   ping_url:
