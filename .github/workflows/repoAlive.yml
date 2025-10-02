@@ -16,9 +16,10 @@ jobs:
         uses: actions/checkout@v4
 
       # Step 2: Make a change to a file
-      # This command appends the current date and time to a file called activity.log
       - name: Update activity log
-        run: echo "Last updated: $(date -u)" >> activity.log
+        # --- THIS IS THE CORRECTED BLOCK ---
+        run: |
+          echo "Last updated: $(date -u)" >> activity.log
 
       # Step 3: Configure Git for the commit
       - name: Configure Git
