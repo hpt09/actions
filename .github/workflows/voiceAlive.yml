@@ -2,8 +2,9 @@ name: Hourly HTTP Request
 
 on:
   schedule:
-    # Runs at the beginning of every hour
-    - cron: '0 * * * *'
+    # Runs hourly at :23. The top of the hour is GitHub's most contended
+    # scheduling slot, so '0 * * * *' is where dropped/delayed runs come from.
+    - cron: '23 * * * *'
   # Allows you to run this workflow manually from the Actions tab for testing
   workflow_dispatch:
 
@@ -12,4 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call the URL endpoint
-        run: curl -sS "https://voice-ai-api-harpreets-projects-f8b2f14c.vercel.app/api/checkBlocks"
+        # --fail-with-body exits non-zero on 4xx/5xx so the run actually fails
+        # (and emails), while still printing the body that names the bad venue.
+        run: curl -sS --fail-with-body "https://voice-ai-api-harpreets-projects-f8b2f14c.vercel.app/api/checkBlocks"
